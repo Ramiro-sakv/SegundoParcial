@@ -59,7 +59,7 @@ class RestfulBookerApiTests {
     @Test
     @DisplayName("API-03 Crear reserva con datos validos")
     void createBookingWithPost() {
-        Map<String, Object> booking = bookingBody("Ramiro", "POST");
+        Map<String, Object> booking = bookingBody("POST");
 
         given()
             .contentType(ContentType.JSON)
@@ -77,7 +77,7 @@ class RestfulBookerApiTests {
     @Test
     @DisplayName("API-04 Consultar la reserva creada")
     void createAndGetBookingById() {
-        int bookingId = createBooking("Ramiro", "ConsultaID");
+        int bookingId = createBooking();
 
         given()
             .header("Accept", "application/json")
@@ -101,11 +101,11 @@ class RestfulBookerApiTests {
             .statusCode(404);
     }
 
-    private int createBooking(String firstName, String lastName) {
+    private int createBooking() {
         Response response = given()
                 .contentType(ContentType.JSON)
                 .header("Accept", "application/json")
-                .body(bookingBody(firstName, lastName))
+                .body(bookingBody("ConsultaID"))
             .when()
                 .post("/booking");
 
@@ -113,13 +113,13 @@ class RestfulBookerApiTests {
         return response.jsonPath().getInt("bookingid");
     }
 
-    private Map<String, Object> bookingBody(String firstName, String lastName) {
+    private Map<String, Object> bookingBody(String lastName) {
         Map<String, String> dates = Map.of(
                 "checkin", LocalDate.now().plusDays(10).toString(),
                 "checkout", LocalDate.now().plusDays(15).toString());
 
         Map<String, Object> booking = new HashMap<>();
-        booking.put("firstname", firstName);
+        booking.put("firstname", "Ramiro");
         booking.put("lastname", lastName);
         booking.put("totalprice", 150);
         booking.put("depositpaid", true);
