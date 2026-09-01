@@ -12,6 +12,10 @@ Page Object Model y RestAssured.
 - Page Object Model en el paquete `pages`.
 - Solicitudes API GET y POST.
 
+## Documentacion
+
+- [Guion de exposicion con acciones en pantalla](docs/Guion_Exposicion_Con_Acciones_10_Minutos.pdf)
+
 ## Pruebas web
 
 Los identificadores y nombres corresponden a los casos seleccionados en TestLink:
